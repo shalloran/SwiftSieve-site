@@ -17,7 +17,13 @@
     <header class="site-header">
       <div class="header-inner">
         <a href="./index.html" class="brand">
-          <span class="brand-mark" aria-hidden="true"></span>
+          <img
+            src="https://raw.githubusercontent.com/shalloran/SwiftSieve2/main/SwiftSieveDNS/Assets.xcassets/AppIcon.appiconset/AppIcon-120.png"
+            alt=""
+            class="brand-mark-img"
+            width="28"
+            height="28"
+          />
           <span>
             <div class="brand-text-main">SwiftSieve</div>
             <div class="brand-text-sub">DNS proxy for iOS</div>
@@ -46,7 +52,7 @@
           <h1>How SwiftSieve handles DNS traffic.</h1>
           <p>
             SwiftSieve is a DNS filtering tool, not a full VPN service. It is
-            designed to block known trackers and nuisance domains at the DNS
+            designed to block known trackers (and anything else you want to block) at the DNS
             layer using Apple&rsquo;s DNS Proxy API.
           </p>
 
@@ -54,7 +60,7 @@
           <p>
             When you enable SwiftSieve in iOS settings, the system sends DNS
             queries to the SwiftSieve DNS Proxy extension instead of directly to
-            a resolver.
+            a local resolver, or your ISP's DNS resolver.
           </p>
           <ul>
             <li>
@@ -85,7 +91,7 @@
               reach over DNS.
             </li>
             <li>
-              Give users a simple allowlist and block list that apply at the
+              Give users a simple allowlist and blocklist that apply at the
               system DNS level.
             </li>
           </ul>
@@ -94,7 +100,7 @@
             <li>Provide anonymity or hide your IP address from destinations.</li>
             <li>Break state-level surveillance or sophisticated adversaries.</li>
             <li>
-              Replace a full-tunnel VPN for untrusted networks. It only touches
+              Replace a full-tunnel VPN for untrusted networks. It only works on 
               DNS.
             </li>
           </ul>
@@ -130,12 +136,12 @@
               inspected.
             </li>
             <li>
-              Does not silently redirect blocked domains to another host; they
+              Does not silently redirect blocked domains to another host, they
               receive <code>NXDOMAIN</code>.
             </li>
             <li>
-              Does not add additional analytics SDKs or tracking services beyond
-              what is required for DNS proxying.
+              Does not implement ANY SDKs or tracking services whatsoever. If this canary is 
+              removed, you can consider that SwiftSieve has been compromised.
             </li>
             <li>
               Does not act as a generic web proxy or content filter beyond DNS.
@@ -188,7 +194,7 @@
               <a href="mailto:support@swiftsieve.com">support@swiftsieve.com</a>
             </li>
             <li>
-              Or open an issue in the
+              Or if it is not sensitive,open an issue in the
               <a
                 href="https://github.com/shalloran/SwiftSieve2"
                 target="_blank"

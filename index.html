@@ -2,14 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>SwiftSieve DNS – System-wide DNS privacy for iOS</title>
+    <title>SwiftSieve DNS: System-wide DNS privacy for iOS</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <meta
       name="description"
-      content="SwiftSieve uses Apple's DNS Proxy API to block trackers at the DNS layer on iOS. No VPN badge, just system-wide DNS privacy."
+      content="SwiftSieve uses Apple's DNS Proxy API to block trackers at the DNS layer on iOS. Works with your existing VPN, providing system-wide DNS privacy."
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -17,7 +17,13 @@
     <header class="site-header">
       <div class="header-inner">
         <a href="./index.html" class="brand">
-          <span class="brand-mark" aria-hidden="true"></span>
+          <img
+            src="https://raw.githubusercontent.com/shalloran/SwiftSieve2/main/SwiftSieveDNS/Assets.xcassets/AppIcon.appiconset/AppIcon-120.png"
+            alt=""
+            class="brand-mark-img"
+            width="28"
+            height="28"
+          />
           <span>
             <div class="brand-text-main">SwiftSieve</div>
             <div class="brand-text-sub">DNS proxy for iOS</div>
@@ -48,7 +54,7 @@
               <span>System-wide DNS privacy</span>
             </div>
             <h1 class="hero-title">
-              Block trackers at the <span class="accent">DNS layer</span> on
+              Block trackers, ads, malware, and moreat the <span class="accent">DNS layer</span> on
               iOS.
             </h1>
             <p class="hero-subtitle">
@@ -77,8 +83,7 @@
               </a>
             </div>
             <p class="hero-note">
-              when the app store link is live, replace this button&rsquo;s URL
-              with your listing.
+              App Store link coming soon.
             </p>
           </div>
 
@@ -136,11 +141,11 @@
         <div class="sections">
           <section>
             <div class="section-label">How it works</div>
-            <h2 class="section-title">DNS proxy, not yet another VPN.</h2>
+            <h2 class="section-title">DNS proxy that works with your VPN.</h2>
             <p class="section-lede">
               SwiftSieve installs a DNS Proxy extension on your device. When you
               toggle it on, iOS sends DNS queries through SwiftSieve instead of
-              straight to your resolver.
+              straight to your DNS resolver.
             </p>
             <div class="section-grid">
               <div class="card card--soft">
@@ -222,10 +227,10 @@
             </p>
             <div class="section-cta-row">
               <a href="./security.html" class="btn btn-secondary">
-                Read the security model
+                Check out the security model
               </a>
               <a href="./privacy.html" class="btn btn-secondary">
-                Read the privacy policy
+                Check out our privacy policy (spoiler alert: we don't want your data)
               </a>
             </div>
           </section>
