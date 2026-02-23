@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SwiftSieve FAQ</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Frequently asked questions about SwiftSieve, DNS filtering, and how the app works on iOS."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page">
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="./index.html" class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>
+            <div class="brand-text-main">SwiftSieve</div>
+            <div class="brand-text-sub">DNS proxy for iOS</div>
+          </span>
+        </a>
+        <nav class="site-nav">
+          <a href="./index.html" class="nav-link">Home</a>
+          <a href="./security.html" class="nav-link">Security</a>
+          <a href="./privacy.html" class="nav-link">Privacy</a>
+          <a href="./faq.html" class="nav-link">FAQ</a>
+          <a
+            href="https://github.com/shalloran/SwiftSieve2"
+            class="nav-link nav-link--primary"
+            target="_blank"
+            rel="noreferrer"
+            >GitHub</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="shell">
+        <article class="content-page">
+          <p class="badge">FAQ</p>
+          <h1>SwiftSieve FAQ</h1>
+          <p>
+            A few common questions about how SwiftSieve works. If you do not see
+            your question here, feel free to email or open a GitHub issue.
+          </p>
+
+          <h2>Does SwiftSieve use a VPN?</h2>
+          <p>
+            No. SwiftSieve uses Apple&rsquo;s DNS Proxy API
+            (<code>NEDNSProxyProvider</code>). It does not create a full-tunnel
+            VPN and does not show the VPN badge in iOS settings. It only handles
+            DNS queries.
+          </p>
+          <p>
+            For more on the security model and limitations, see the
+            <a href="./security.html">Security</a> page.
+          </p>
+
+          <h2>Which DNS provider does SwiftSieve use?</h2>
+          <p>
+            SwiftSieve forwards non-blocked DNS queries to Cloudflare
+            DNS-over-HTTPS at
+            <code>https://cloudflare-dns.com/dns-query</code>. Blocked domains
+            receive <code>NXDOMAIN</code>.
+          </p>
+          <p>
+            At this time, the app does not expose a setting to choose a different
+            upstream resolver.
+          </p>
+
+          <h2>Can I change the upstream DNS?</h2>
+          <p>
+            Not in this version. SwiftSieve is currently hard-wired to use
+            Cloudflare DoH as the only upstream. This keeps the configuration
+            surface small while the core DNS proxy behavior matures.
+          </p>
+
+          <h2>What does SwiftSieve log?</h2>
+          <p>
+            SwiftSieve maintains a local block log in its App Group. Each entry
+            includes:
+          </p>
+          <ul>
+            <li>The domain that was blocked.</li>
+            <li>A timestamp.</li>
+            <li>Which list (or custom rule) caused the block.</li>
+          </ul>
+          <p>
+            This log is stored locally and is used to show you what was blocked.
+            SwiftSieve does not upload this log to a SwiftSieve-owned analytics
+            backend.
+          </p>
+          <p>
+            For more detail on data handling, see the
+            <a href="./privacy.html">Privacy</a> page and the
+            <a
+              href="https://github.com/shalloran/SwiftSieve2/blob/main/privacy.md"
+              target="_blank"
+              rel="noreferrer"
+              >privacy.md</a
+            >
+            in the repo.
+          </p>
+
+          <h2>Does SwiftSieve see my full browsing history?</h2>
+          <p>
+            SwiftSieve only sees DNS queries, not full HTTPS URLs. It also does
+            not attempt to MITM HTTPS or proxy application traffic. The block
+            log records only blocked domains and related metadata, not a complete
+            browsing history.
+          </p>
+
+          <h2>Do I need an Apple Developer account?</h2>
+          <p>
+            If you install SwiftSieve from the App Store, you do not need a
+            developer account. If you want to build and run the app from the
+            GitHub source, you will need an Apple Developer account to set up
+            the app group and DNS Proxy extension on your own device.
+          </p>
+
+          <h2>How do I report a bug or suggest a feature?</h2>
+          <p>You can either:</p>
+          <ul>
+            <li>
+              Open an issue in the
+              <a
+                href="https://github.com/shalloran/SwiftSieve2"
+                target="_blank"
+                rel="noreferrer"
+                >SwiftSieve2 GitHub repo</a
+              >, or
+            </li>
+            <li>
+              Email:
+              <a href="mailto:support@swiftsieve.com">support@swiftsieve.com</a>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div>
+          <div>© <span id="year"></span> SwiftSieve</div>
+          <div>
+            questions? email
+            <a href="mailto:support@swiftsieve.com">support@swiftsieve.com</a>.
+          </div>
+        </div>
+        <div class="footer-links">
+          <a href="./index.html">Home</a>
+          <a href="./security.html">Security</a>
+          <a href="./privacy.html">Privacy</a>
+          <a href="./faq.html">FAQ</a>
+          <a
+            href="https://github.com/shalloran/SwiftSieve2"
+            target="_blank"
+            rel="noreferrer"
+            >GitHub</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const y = document.getElementById("year");
+      if (y) {
+        y.textContent = new Date().getFullYear().toString();
+      }
+    </script>
+  </body>
+</html>
+

@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SwiftSieve Security Model</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Learn how SwiftSieve handles DNS traffic, which threats it is designed for, and what it does not attempt to do."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page">
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="./index.html" class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>
+            <div class="brand-text-main">SwiftSieve</div>
+            <div class="brand-text-sub">DNS proxy for iOS</div>
+          </span>
+        </a>
+        <nav class="site-nav">
+          <a href="./index.html" class="nav-link">Home</a>
+          <a href="./security.html" class="nav-link">Security</a>
+          <a href="./privacy.html" class="nav-link">Privacy</a>
+          <a href="./faq.html" class="nav-link">FAQ</a>
+          <a
+            href="https://github.com/shalloran/SwiftSieve2"
+            class="nav-link nav-link--primary"
+            target="_blank"
+            rel="noreferrer"
+            >GitHub</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="shell">
+        <article class="content-page">
+          <p class="badge">Security model</p>
+          <h1>How SwiftSieve handles DNS traffic.</h1>
+          <p>
+            SwiftSieve is a DNS filtering tool, not a full VPN service. It is
+            designed to block known trackers and nuisance domains at the DNS
+            layer using Apple&rsquo;s DNS Proxy API.
+          </p>
+
+          <h2>High-level architecture</h2>
+          <p>
+            When you enable SwiftSieve in iOS settings, the system sends DNS
+            queries to the SwiftSieve DNS Proxy extension instead of directly to
+            a resolver.
+          </p>
+          <ul>
+            <li>
+              SwiftSieve relies on <code>NEDNSProxyProvider</code>, not a
+              full-tunnel VPN.
+            </li>
+            <li>
+              Block lists and the allowlist live in a shared App Group so the
+              extension and app can read the same data.
+            </li>
+            <li>
+              Non-blocked DNS queries are forwarded to Cloudflare DoH at
+              <code>https://cloudflare-dns.com/dns-query</code>.
+            </li>
+            <li>Blocked domains get an <code>NXDOMAIN</code> response.</li>
+          </ul>
+
+          <h2>Threat model &amp; goals</h2>
+          <p>
+            SwiftSieve targets a narrow, clear threat model. It is built to:
+          </p>
+          <ul>
+            <li>
+              Reduce tracking and advertising domains that rely on DNS lookups.
+            </li>
+            <li>
+              Make it easier to understand which domains apps are attempting to
+              reach over DNS.
+            </li>
+            <li>
+              Give users a simple allowlist and block list that apply at the
+              system DNS level.
+            </li>
+          </ul>
+          <p>SwiftSieve is explicitly not designed to:</p>
+          <ul>
+            <li>Provide anonymity or hide your IP address from destinations.</li>
+            <li>Break state-level surveillance or sophisticated adversaries.</li>
+            <li>
+              Replace a full-tunnel VPN for untrusted networks. It only touches
+              DNS.
+            </li>
+          </ul>
+
+          <h2>What SwiftSieve does</h2>
+          <ul>
+            <li>Receives DNS queries from iOS via the DNS Proxy API.</li>
+            <li>
+              Checks the requested domain against bundled block lists and your
+              own custom lists.
+            </li>
+            <li>
+              Applies your allowlist first: any domain on the allowlist is never
+              blocked, even if it appears in a block list.
+            </li>
+            <li>
+              For blocked domains, returns <code>NXDOMAIN</code> to the system.
+            </li>
+            <li>
+              For allowed domains, forwards the query to Cloudflare using
+              DNS-over-HTTPS.
+            </li>
+            <li>
+              Appends blocked domains to a local block log stored in the shared
+              App Group.
+            </li>
+          </ul>
+
+          <h2>What SwiftSieve does not do</h2>
+          <ul>
+            <li>
+              Does not intercept or decrypt HTTPS traffic. Only DNS queries are
+              inspected.
+            </li>
+            <li>
+              Does not silently redirect blocked domains to another host; they
+              receive <code>NXDOMAIN</code>.
+            </li>
+            <li>
+              Does not add additional analytics SDKs or tracking services beyond
+              what is required for DNS proxying.
+            </li>
+            <li>
+              Does not act as a generic web proxy or content filter beyond DNS.
+            </li>
+          </ul>
+
+          <h2>Cloudflare as the only upstream</h2>
+          <p>
+            At this time, SwiftSieve sends all non-blocked DNS queries to
+            Cloudflare DNS-over-HTTPS:
+          </p>
+          <ul>
+            <li>
+              Endpoint:
+              <code>https://cloudflare-dns.com/dns-query</code>
+            </li>
+            <li>
+              There is no UI to configure a different upstream resolver in this
+              version.
+            </li>
+            <li>
+              You can review Cloudflare&rsquo;s public documentation for details
+              on how they handle DNS queries.
+            </li>
+          </ul>
+
+          <h2>Code transparency</h2>
+          <p>
+            The DNS proxy extension and app code live in the public GitHub repo.
+            You can audit the implementation, open issues, or submit pull
+            requests:
+          </p>
+          <p>
+            <a
+              href="https://github.com/shalloran/SwiftSieve2"
+              target="_blank"
+              rel="noreferrer"
+              >SwiftSieve2 on GitHub</a
+            >
+          </p>
+
+          <h2>Questions or reports</h2>
+          <p>
+            If you spot a security issue, have questions about the implementation,
+            or want to discuss improvements, please reach out:
+          </p>
+          <ul>
+            <li>
+              Email:
+              <a href="mailto:support@swiftsieve.com">support@swiftsieve.com</a>
+            </li>
+            <li>
+              Or open an issue in the
+              <a
+                href="https://github.com/shalloran/SwiftSieve2"
+                target="_blank"
+                rel="noreferrer"
+                >GitHub repo</a
+              >.
+            </li>
+          </ul>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div>
+          <div>© <span id="year"></span> SwiftSieve</div>
+          <div>
+            questions? email
+            <a href="mailto:support@swiftsieve.com">support@swiftsieve.com</a>.
+          </div>
+        </div>
+        <div class="footer-links">
+          <a href="./index.html">Home</a>
+          <a href="./security.html">Security</a>
+          <a href="./privacy.html">Privacy</a>
+          <a href="./faq.html">FAQ</a>
+          <a
+            href="https://github.com/shalloran/SwiftSieve2"
+            target="_blank"
+            rel="noreferrer"
+            >GitHub</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const y = document.getElementById("year");
+      if (y) {
+        y.textContent = new Date().getFullYear().toString();
+      }
+    </script>
+  </body>
+</html>
+

@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SwiftSieve DNS – System-wide DNS privacy for iOS</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="SwiftSieve uses Apple's DNS Proxy API to block trackers at the DNS layer on iOS. No VPN badge, just system-wide DNS privacy."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page">
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="./index.html" class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>
+            <div class="brand-text-main">SwiftSieve</div>
+            <div class="brand-text-sub">DNS proxy for iOS</div>
+          </span>
+        </a>
+        <nav class="site-nav">
+          <a href="./index.html" class="nav-link">Home</a>
+          <a href="./security.html" class="nav-link">Security</a>
+          <a href="./privacy.html" class="nav-link">Privacy</a>
+          <a href="./faq.html" class="nav-link">FAQ</a>
+          <a
+            href="https://github.com/shalloran/SwiftSieve2"
+            class="nav-link nav-link--primary"
+            target="_blank"
+            rel="noreferrer"
+            >GitHub</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="shell">
+        <section class="hero">
+          <div>
+            <div class="hero-kicker">
+              <span class="dot"></span>
+              <span>System-wide DNS privacy</span>
+            </div>
+            <h1 class="hero-title">
+              Block trackers at the <span class="accent">DNS layer</span> on
+              iOS.
+            </h1>
+            <p class="hero-subtitle">
+              SwiftSieve uses Apple&rsquo;s DNS Proxy API to filter DNS queries
+              before they ever leave your device. No VPN badge, no tunnel &mdash;
+              just a fast DNS proxy that blocks known trackers by domain.
+            </p>
+
+            <div class="hero-actions">
+              <a
+                class="btn btn-primary"
+                href="https://github.com/shalloran/SwiftSieve2"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span>View on GitHub</span>
+              </a>
+              <a class="btn btn-secondary" href="#">
+                <span class="app-store-badge">
+                  <span class="app-store-icon" aria-hidden="true"></span>
+                  <span>
+                    <div class="app-store-text-1">App Store</div>
+                    <div class="app-store-text-2">coming soon</div>
+                  </span>
+                </span>
+              </a>
+            </div>
+            <p class="hero-note">
+              when the app store link is live, replace this button&rsquo;s URL
+              with your listing.
+            </p>
+          </div>
+
+          <div class="hero-device" aria-hidden="true">
+            <div class="device-frame">
+              <div class="device-inner">
+                <div class="device-status">
+                  <span class="pill badge-on">
+                    <span class="dot-green"></span>
+                    <span>DNS proxy on</span>
+                  </span>
+                  <span class="tag">Cloudflare DoH</span>
+                </div>
+                <div class="switch-row">
+                  <div>
+                    <div style="font-size: 0.9rem; color: #e5e7eb">
+                      SwiftSieve DNS
+                    </div>
+                    <div style="font-size: 0.8rem; color: #9ca3af">
+                      Blocks trackers at the DNS layer
+                    </div>
+                  </div>
+                  <div class="switch">
+                    <div class="switch-thumb"></div>
+                  </div>
+                </div>
+                <div class="log-card">
+                  <div class="log-row">
+                    <div>
+                      <div class="log-domain">ads.example.com</div>
+                      <div class="log-meta">blocked · General marketing</div>
+                    </div>
+                    <span class="tag">NXDOMAIN</span>
+                  </div>
+                  <div class="log-row">
+                    <div>
+                      <div class="log-domain">graph.facebook.com</div>
+                      <div class="log-meta">blocked · Facebook trackers</div>
+                    </div>
+                    <span class="tag">NXDOMAIN</span>
+                  </div>
+                  <div class="log-row">
+                    <div>
+                      <div class="log-domain">api.yourbank.com</div>
+                      <div class="log-meta">allowed · allowlist</div>
+                    </div>
+                    <span class="tag">forwarded</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="sections">
+          <section>
+            <div class="section-label">How it works</div>
+            <h2 class="section-title">DNS proxy, not yet another VPN.</h2>
+            <p class="section-lede">
+              SwiftSieve installs a DNS Proxy extension on your device. When you
+              toggle it on, iOS sends DNS queries through SwiftSieve instead of
+              straight to your resolver.
+            </p>
+            <div class="section-grid">
+              <div class="card card--soft">
+                <h3>1. Enable the DNS proxy</h3>
+                <p>
+                  Turn on the SwiftSieve DNS proxy in iOS Settings. There&rsquo;s
+                  no VPN badge &mdash; the system simply uses the DNS extension
+                  for lookups.
+                </p>
+              </div>
+              <div class="card card--soft">
+                <h3>2. Filter by domain</h3>
+                <p>
+                  Every DNS query is checked against bundled block lists plus
+                  your own custom domains. Allowlisted domains always win, even
+                  if they appear on a block list.
+                </p>
+              </div>
+              <div class="card card--soft">
+                <h3>3. Forward the rest</h3>
+                <p>
+                  Non-blocked queries are forwarded to Cloudflare DNS-over-HTTPS
+                  at <code>https://cloudflare-dns.com/dns-query</code>. Blocked
+                  domains get a clean <code>NXDOMAIN</code>.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="section-label">Key features</div>
+            <h2 class="section-title">Built to be small, clear, and honest.</h2>
+            <p class="section-lede">
+              SwiftSieve focuses on one job: DNS filtering on-device. No
+              full-tunnel VPN stack, no mystery servers, no surprise
+              monetization.
+            </p>
+            <div class="section-grid">
+              <div class="card">
+                <h3>System-wide DNS filtering</h3>
+                <p>
+                  Uses Apple&rsquo;s DNS Proxy API to filter DNS for the whole
+                  device. Apps don&rsquo;t have to know SwiftSieve exists.
+                </p>
+              </div>
+              <div class="card">
+                <h3>Curated block lists &amp; allowlist</h3>
+                <p>
+                  Bundled lists like general marketing, data trackers, and
+                  Facebook. Add your own domains and never-block allowlist
+                  entries.
+                </p>
+              </div>
+              <div class="card">
+                <h3>Local block log</h3>
+                <p>
+                  See what was blocked, when, and which list caught it. Useful
+                  when you&rsquo;re debugging an app that suddenly stopped
+                  loading.
+                </p>
+              </div>
+              <div class="card">
+                <h3>Open source, Cloudflare only</h3>
+                <p>
+                  Code lives on GitHub and uses Cloudflare as the only upstream
+                  DNS. No other resolver, no hidden analytics SDK.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="section-label">Security &amp; privacy</div>
+            <h2 class="section-title">Understand what SwiftSieve does &mdash; and doesn&rsquo;t.</h2>
+            <p class="section-lede">
+              SwiftSieve is not a VPN or anonymity tool. It is a DNS filter with
+              clear boundaries. Read the details before you trust it with your
+              traffic.
+            </p>
+            <div class="section-cta-row">
+              <a href="./security.html" class="btn btn-secondary">
+                Read the security model
+              </a>
+              <a href="./privacy.html" class="btn btn-secondary">
+                Read the privacy policy
+              </a>
+            </div>
+          </section>
+
+          <section>
+            <div class="section-label">FAQ</div>
+            <h2 class="section-title">Common questions</h2>
+            <p class="section-lede">
+              A quick taste of the FAQ. For more detail, head over to the full
+              FAQ page.
+            </p>
+            <div class="faq-list">
+              <div class="faq-item">
+                <h3>Does SwiftSieve use a VPN?</h3>
+                <p>
+                  No. SwiftSieve uses a DNS Proxy extension
+                  (<code>NEDNSProxyProvider</code>). There is no full-tunnel VPN
+                  and no VPN badge in iOS Settings.
+                </p>
+              </div>
+              <div class="faq-item">
+                <h3>Where do non-blocked queries go?</h3>
+                <p>
+                  Non-blocked DNS is forwarded to Cloudflare over DNS-over-HTTPS
+                  at <code>https://cloudflare-dns.com/dns-query</code>. Blocked
+                  domains receive <code>NXDOMAIN</code>.
+                </p>
+              </div>
+            </div>
+            <div style="margin-top: 1.3rem">
+              <a href="./faq.html" class="btn btn-secondary">View full FAQ</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div>
+          <div>© <span id="year"></span> SwiftSieve</div>
+          <div>
+            questions? email
+            <a href="mailto:support@swiftsieve.com">support@swiftsieve.com</a>.
+          </div>
+        </div>
+        <div class="footer-links">
+          <a href="./index.html">Home</a>
+          <a href="./security.html">Security</a>
+          <a href="./privacy.html">Privacy</a>
+          <a href="./faq.html">FAQ</a>
+          <a
+            href="https://github.com/shalloran/SwiftSieve2"
+            target="_blank"
+            rel="noreferrer"
+            >GitHub</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const y = document.getElementById("year");
+      if (y) {
+        y.textContent = new Date().getFullYear().toString();
+      }
+    </script>
+  </body>
+</html>
+

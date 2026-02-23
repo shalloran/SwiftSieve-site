@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SwiftSieve Privacy Policy</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Read the SwiftSieve privacy policy, including what data is processed and how DNS queries are handled."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page">
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="./index.html" class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>
+            <div class="brand-text-main">SwiftSieve</div>
+            <div class="brand-text-sub">DNS proxy for iOS</div>
+          </span>
+        </a>
+        <nav class="site-nav">
+          <a href="./index.html" class="nav-link">Home</a>
+          <a href="./security.html" class="nav-link">Security</a>
+          <a href="./privacy.html" class="nav-link">Privacy</a>
+          <a href="./faq.html" class="nav-link">FAQ</a>
+          <a
+            href="https://github.com/shalloran/SwiftSieve2"
+            class="nav-link nav-link--primary"
+            target="_blank"
+            rel="noreferrer"
+            >GitHub</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="shell">
+        <article class="content-page">
+          <p class="badge">Privacy</p>
+          <h1>SwiftSieve Privacy Policy</h1>
+          <p>
+            This page summarizes how SwiftSieve handles data. For the authoritative
+            policy, see the
+            <a
+              href="https://github.com/shalloran/SwiftSieve2/blob/main/privacy.md"
+              target="_blank"
+              rel="noreferrer"
+              >privacy.md</a
+            >
+            file in the GitHub repository.
+          </p>
+
+          <h2>What SwiftSieve does at the DNS layer</h2>
+          <p>
+            SwiftSieve receives DNS queries from your device, compares the
+            requested domains against local block lists and your allowlist, and
+            then either:
+          </p>
+          <ul>
+            <li>
+              Returns <code>NXDOMAIN</code> for blocked domains, or
+            </li>
+            <li>
+              Forwards the query to Cloudflare DNS-over-HTTPS for all other
+              domains.
+            </li>
+          </ul>
+
+          <h2>Data stored on your device</h2>
+          <ul>
+            <li>
+              <strong>Block lists &amp; allowlist</strong> &mdash; The bundled
+              block lists and your custom entries are stored locally in an App
+              Group so the app and extension can share them.
+            </li>
+            <li>
+              <strong>Block log</strong> &mdash; When SwiftSieve blocks a domain,
+              a short entry (domain, timestamp, and which list matched) is
+              appended to a local log in the same App Group.
+            </li>
+          </ul>
+          <p>
+            This information is used solely to operate the app (show you what was
+            blocked, and why) and is not sent to any analytics or advertising
+            services by SwiftSieve.
+          </p>
+
+          <h2>What SwiftSieve does not collect</h2>
+          <p>SwiftSieve is intentionally narrow in scope. It does not:</p>
+          <ul>
+            <li>
+              Log the full contents of your DNS history to a remote server under
+              the control of SwiftSieve.
+            </li>
+            <li>
+              Inspect or decrypt HTTPS traffic at the application layer. Only DNS
+              queries are handled.
+            </li>
+            <li>
+              Integrate third-party analytics SDKs for advertising or profiling.
+            </li>
+          </ul>
+
+          <h2>Cloudflare DNS-over-HTTPS</h2>
+          <p>
+            For allowed domains, SwiftSieve forwards DNS queries to Cloudflare
+            using DNS-over-HTTPS. This means:
+          </p>
+          <ul>
+            <li>
+              Your non-blocked DNS queries are visible to Cloudflare, subject to
+              their privacy policy.
+            </li>
+            <li>
+              SwiftSieve does not currently support configuring other upstream
+              DNS providers in the app.
+            </li>
+          </ul>
+          <p>
+            For more detail on how Cloudflare handles DNS queries, refer to
+            Cloudflare&rsquo;s public documentation.
+          </p>
+
+          <h2>Crash reports and diagnostics</h2>
+          <p>
+            If SwiftSieve uses platform-standard crash reporting (for example,
+            via Apple), those reports may include basic diagnostic information
+            such as device model, OS version, and stack traces. They should not
+            contain DNS query contents; SwiftSieve does not attempt to add
+            additional user tracking to these reports.
+          </p>
+
+          <h2>Your choices</h2>
+          <ul>
+            <li>
+              You can disable the SwiftSieve DNS proxy at any time in iOS
+              settings.
+            </li>
+            <li>
+              You can clear or adjust your custom block lists and allowlist from
+              within the app.
+            </li>
+            <li>
+              You can choose not to install or can uninstall the app entirely if
+              you no longer wish to use it.
+            </li>
+          </ul>
+
+          <h2>Contact</h2>
+          <p>
+            If you have questions about this policy or how SwiftSieve handles
+            data, please contact:
+          </p>
+          <ul>
+            <li>
+              Email:
+              <a href="mailto:support@swiftsieve.com">support@swiftsieve.com</a>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div>
+          <div>© <span id="year"></span> SwiftSieve</div>
+          <div>
+            questions? email
+            <a href="mailto:support@swiftsieve.com">support@swiftsieve.com</a>.
+          </div>
+        </div>
+        <div class="footer-links">
+          <a href="./index.html">Home</a>
+          <a href="./security.html">Security</a>
+          <a href="./privacy.html">Privacy</a>
+          <a href="./faq.html">FAQ</a>
+          <a
+            href="https://github.com/shalloran/SwiftSieve2"
+            target="_blank"
+            rel="noreferrer"
+            >GitHub</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const y = document.getElementById("year");
+      if (y) {
+        y.textContent = new Date().getFullYear().toString();
+      }
+    </script>
+  </body>
+</html>
+
