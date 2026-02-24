@@ -56,16 +56,29 @@
             your question here, feel free to email or open a GitHub issue.
           </p>
 
-          <h2>Does SwiftSieve use a VPN?</h2>
+          <h2>Is SwiftSieve a VPN?</h2>
           <p>
             No. SwiftSieve uses Apple&rsquo;s DNS Proxy API
-            (<code>NEDNSProxyProvider</code>). It does not create a full-tunnel
-            VPN and does not show the VPN badge in iOS settings. It only handles
-            DNS queries.
+            (<code>NEDNSProxyProvider</code>). It does not require a VPN setup,
+            and does not show the VPN badge in iOS settings. It only handles
+            DNS lookups.
           </p>
           <p>
             For more on the security model and limitations, see the
             <a href="./security.html">Security</a> page.
+          </p>
+
+          <h2>SwiftSieve isn't working... what do I do?</h2>
+          <p>
+            First, check if SwiftSieve is enabled in iOS: 
+            Settings -> General -> VPN & Device Management -> DNS -> SwiftSieve 
+            which should show SwiftSieve DNS as "running".
+          </p>
+          <p>
+            If SwiftSieve is not enabled, or if the block log is empty, you may
+            need to reinstall the app. If you've already tried re-installing, please email
+            <a href="mailto:support@swiftsieve.com">support@swiftsieve.com</a>
+            and we will help you troubleshoot!
           </p>
 
           <h2>Which DNS provider does SwiftSieve use?</h2>
@@ -117,7 +130,7 @@
           <h2>Does SwiftSieve see my full browsing history?</h2>
           <p>
             SwiftSieve only sees DNS queries, not full HTTPS URLs. It also does
-            not attempt to MITM HTTPS or proxy application traffic. The block
+            not attempt to intercept HTTPS or proxy application traffic. The block
             log records only blocked domains and related metadata, not a complete
             browsing history.
           </p>
@@ -159,7 +172,7 @@
             questions? email
             <a href="mailto:support@swiftsieve.com">support@swiftsieve.com</a>.
           </div>
-          <div>This website does not use cookies or analytics.</div>
+          <div>This website does not use cookies or analytics, and we never will.</div>
         </div>
         <div class="footer-links">
           <a href="./index.html">Home</a>

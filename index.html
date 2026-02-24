@@ -137,7 +137,7 @@
             <h2 class="section-title">DNS proxy that works with your VPN.</h2>
             <p class="section-lede">
               SwiftSieve installs a DNS Proxy extension on your device. When you
-              toggle it on, iOS sends DNS queries through SwiftSieve instead of
+              toggle on SwiftSieve, iOS sends DNS queries through SwiftSieve instead of
               straight to your DNS resolver.
             </p>
             <div class="section-grid">
@@ -145,7 +145,7 @@
                 <h3>1. Enable the DNS proxy</h3>
                 <p>
                   Turn on the SwiftSieve DNS proxy in iOS Settings. There&rsquo;s
-                  no VPN badge &mdash; the system simply uses the DNS extension
+                  no VPN setup,the system simply uses the DNS extension
                   for lookups.
                 </p>
               </div>
@@ -153,16 +153,14 @@
                 <h3>2. Filter by domain</h3>
                 <p>
                   Every DNS query is checked against bundled block lists plus
-                  your own custom domains. Allowlisted domains always win, even
-                  if they appear on a block list.
+                  your own custom domains. Allowlisted domains override block lists items.
                 </p>
               </div>
               <div class="card card--soft">
                 <h3>3. Forward the rest</h3>
                 <p>
                   Non-blocked queries are forwarded to Cloudflare DNS-over-HTTPS
-                  at <code>https://cloudflare-dns.com/dns-query</code>. Blocked
-                  domains get a clean <code>NXDOMAIN</code>.
+                  at <code>https://cloudflare-dns.com/dns-query</code>.
                 </p>
               </div>
             </div>
@@ -188,7 +186,7 @@
                 <h3>Curated block lists &amp; allowlist</h3>
                 <p>
                   Bundled lists like general marketing, data trackers, and
-                  Facebook. Add your own domains and never-block allowlist
+                  Facebook. Add your own domains and allowlist
                   entries.
                 </p>
               </div>
@@ -214,7 +212,7 @@
             <div class="section-label">Security &amp; privacy</div>
             <h2 class="section-title">Understand what SwiftSieve does.</h2>
             <p class="section-lede">
-              SwiftSieve is not a VPN or anonymity tool. It is a DNS filter. Read the details before you trust it with your
+              SwiftSieve is not a VPN or anonymity tool. It is a DNS filter, pure and simple. Read the details before you trust it with your
               traffic, and reach out to us if you have any questions!
             </p>
             <div class="section-cta-row">
@@ -222,7 +220,7 @@
                 Check out the security model
               </a>
               <a href="./privacy.html" class="btn btn-secondary">
-                Check out our privacy policy (spoiler alert: we don't want your data)
+                Read our privacy policy (spoiler alert: we don't want your data)
               </a>
             </div>
           </section>
@@ -246,7 +244,7 @@
               <div class="faq-item">
                 <h3>Where do non-blocked queries go?</h3>
                 <p>
-                  Non-blocked DNS is forwarded to Cloudflare over DNS-over-HTTPS
+                  Allowed DNS queries are forwarded to Cloudflare over DNS-over-HTTPS
                   at <code>https://cloudflare-dns.com/dns-query</code>. Blocked
                   domains receive <code>NXDOMAIN</code>.
                 </p>
@@ -268,7 +266,7 @@
             questions? email
             <a href="mailto:support@swiftsieve.com">support@swiftsieve.com</a>.
           </div>
-          <div>This website does not use cookies or analytics.</div>
+          <div>This website does not use cookies or analytics, and we never will.</div>
         </div>
         <div class="footer-links">
           <a href="./index.html">Home</a>
