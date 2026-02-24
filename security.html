@@ -9,7 +9,7 @@
     />
     <meta
       name="description"
-      content="Learn how SwiftSieve handles DNS traffic, which threats it is designed for, and what it does not attempt to do."
+      content="Learn how SwiftSieve handles DNS traffic, what it is designed for, and what it does not attempt to do."
     />
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/shalloran/SwiftSieve2/main/SwiftSieveDNS/Assets.xcassets/AppIcon.appiconset/AppIcon-120.png" />
     <link rel="stylesheet" href="./styles.css" />
@@ -52,7 +52,7 @@
           <p class="badge">Security model</p>
           <h1>How SwiftSieve handles DNS traffic.</h1>
           <p>
-            SwiftSieve is a DNS filtering tool, not a full VPN service. It is
+            SwiftSieve is a DNS filtering tool, not a VPN service. It is
             designed to block known trackers (and anything else you want to block) at the DNS
             layer using Apple&rsquo;s DNS Proxy API.
           </p>
@@ -88,22 +88,18 @@
               Reduce tracking and advertising domains that rely on DNS lookups.
             </li>
             <li>
-              Make it easier to understand which domains apps are attempting to
+              Make it easier to understand what trackers or unwanted domains your apps are attempting to
               reach over DNS.
             </li>
             <li>
-              Give users a simple allowlist and blocklist that apply at the
-              system DNS level.
+              Give users a simple way to block and allow traffic on their devices.
             </li>
           </ul>
           <p>SwiftSieve is explicitly not designed to:</p>
           <ul>
             <li>Provide anonymity or hide your IP address from destinations.</li>
-            <li>Break state-level surveillance or sophisticated adversaries.</li>
-            <li>
-              Replace a full-tunnel VPN for untrusted networks. It only works on 
-              DNS.
-            </li>
+            <li>Break state-level surveillance or stop sophisticated adversaries.</li>
+            <li> Replace a full-tunnel VPN for untrusted networks. It only works via DNS. </li>
           </ul>
 
           <h2>What SwiftSieve does</h2>
@@ -124,10 +120,7 @@
               For allowed domains, forwards the query to Cloudflare using
               DNS-over-HTTPS.
             </li>
-            <li>
-              Appends blocked domains to a local block log stored in the shared
-              App Group.
-            </li>
+            <li>Appends blocked domains to a local block log stored in the shared App Group.</li>
           </ul>
 
           <h2>What SwiftSieve does not do</h2>
@@ -137,8 +130,8 @@
               inspected.
             </li>
             <li>
-              Does not silently redirect blocked domains to another host, they
-              receive <code>NXDOMAIN</code>.
+              Does not redirect blocked domains to another host; iOS simply
+              receives <code>NXDOMAIN</code>. This means that your device will just fail to resolve the domain.
             </li>
             <li>
               Does not implement ANY SDKs or tracking services whatsoever. If this canary is 
@@ -149,7 +142,7 @@
             </li>
           </ul>
 
-          <h2>Cloudflare as the only upstream</h2>
+          <h2>Cloudflare as your system-wide DNS upstream resolver</h2>
           <p>
             At this time, SwiftSieve sends all non-blocked DNS queries to
             Cloudflare DNS-over-HTTPS:
@@ -160,12 +153,12 @@
               <code>https://cloudflare-dns.com/dns-query</code>
             </li>
             <li>
-              There is no UI to configure a different upstream resolver in this
-              version.
+              There is no way to configure a different upstream resolver in this
+              version. This is something we may add in the future, but for now, it is just Cloudflare!
             </li>
             <li>
               You can review Cloudflare&rsquo;s public documentation for details
-              on how they handle DNS queries.
+              on how they handle DNS queries here: <a href="https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/" target="_blank" rel="noreferrer">Cloudflare DNS-over-HTTPS FAQ</a>.
             </li>
           </ul>
 
@@ -195,7 +188,7 @@
               <a href="mailto:support@swiftsieve.com">support@swiftsieve.com</a>
             </li>
             <li>
-              Or if it is not sensitive,open an issue in the
+              Or if it is not sensitive, open an issue in the
               <a
                 href="https://github.com/shalloran/SwiftSieve2"
                 target="_blank"
@@ -216,6 +209,7 @@
             questions? email
             <a href="mailto:support@swiftsieve.com">support@swiftsieve.com</a>.
           </div>
+          <div>This website does not use cookies or analytics.</div>
         </div>
         <div class="footer-links">
           <a href="./index.html">Home</a>
