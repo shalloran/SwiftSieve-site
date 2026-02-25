@@ -6,10 +6,11 @@ This site is designed to be served as plain static files (no build step) from Gi
 
 ## project struct
 
-- `index.html` – landing page with hero, how-it-works, key features, and links to the GitHub repo and a placeholder App Store button.
+- `index.html` – landing page with hero, how-it-works, key features, and links to the GitHub repo and the Building guide (SwiftSieve is not on the App Store due to DNS proxy API limitations).
+- `building.html` – step-by-step guide to building and installing SwiftSieve from source in Xcode.
 - `security.html` – explains the security model and what SwiftSieve does (and does not) do.
 - `privacy.html` – human-readable privacy summary with a link to the authoritative `privacy.md` in the app repo.
-- `faq.html` – common questions and answers, with links back to the security and privacy pages.
+- `faq.html` – common questions and answers, with links back to the security, privacy, and building pages.
 - `styles.css` – shared dark-theme styling used by all pages.
 
 There is no JavaScript framework. The only JavaScript present is a one-liner to keep the footer year up to date.

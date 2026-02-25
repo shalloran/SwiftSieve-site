@@ -2,14 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>SwiftSieve FAQ</title>
+    <title>Building SwiftSieve in Xcode</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <meta
       name="description"
-      content="Frequently asked questions about SwiftSieve, DNS filtering, and how the app works on iOS."
+      content="Step-by-step guide to building and installing SwiftSieve from source in Xcode. SwiftSieve is not on the App Store due to DNS proxy API limitations."
     />
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/shalloran/SwiftSieve2/main/SwiftSieveDNS/Assets.xcassets/AppIcon.appiconset/AppIcon-120.png" />
     <link rel="stylesheet" href="./styles.css" />
@@ -50,118 +50,82 @@
     <main>
       <div class="shell">
         <article class="content-page">
-          <p class="badge">FAQ</p>
-          <h1>SwiftSieve FAQ</h1>
+          <p class="badge">Building</p>
+          <h1>Build SwiftSieve in Xcode</h1>
           <p>
-            A few common questions about how SwiftSieve works. If you do not see
-            your question here, feel free to email or open a GitHub issue.
+            SwiftSieve is not distributed on the App Store: Apple&rsquo;s DNS proxy
+            APIs have distribution limits. You install by building from source in
+            Xcode and running on your own device. You&rsquo;ll need a Mac, Xcode,
+            and an Apple Developer account (free or paid).
           </p>
 
-          <h2>Is SwiftSieve a VPN?</h2>
-          <p>
-            No. SwiftSieve uses Apple&rsquo;s DNS Proxy API
-            (<code>NEDNSProxyProvider</code>). It does not require a VPN setup,
-            and does not show the VPN badge in iOS settings. It only handles
-            DNS lookups.
-          </p>
-          <p>
-            For more on the security model and limitations, see the
-            <a href="./security.html">Security</a> page.
-          </p>
+          <h2>Steps</h2>
+          <div class="build-steps">
+            <div class="build-step">
+              <span class="build-step-num" aria-hidden="true">1</span>
+              <div>
+                <h3>Clone the repo</h3>
+                <p>
+                  Open Terminal and clone the SwiftSieve2 repository. If you have
+                  Git installed:
+                </p>
+                <pre class="build-code"><code>git clone https://github.com/shalloran/SwiftSieve2.git
+cd SwiftSieve2</code></pre>
+              </div>
+            </div>
+            <div class="build-step">
+              <span class="build-step-num" aria-hidden="true">2</span>
+              <div>
+                <h3>Open in Xcode</h3>
+                <p>
+                  Open the project. In Finder, double-click
+                  <code>SwiftSieveDNS.xcodeproj</code> (in the repo root), or from
+                  Terminal run <code>open SwiftSieveDNS.xcodeproj</code>. Xcode will
+                  load the app and DNS proxy extension targets.
+                </p>
+              </div>
+            </div>
+            <div class="build-step">
+              <span class="build-step-num" aria-hidden="true">3</span>
+              <div>
+                <h3>Set your team and signing</h3>
+                <p>
+                  In Xcode, select the <strong>SwiftSieveDNS</strong> project in
+                  the navigator, then select the <strong>SwiftSieveDNS</strong> app
+                  target. Under <strong>Signing &amp; Capabilities</strong>, choose
+                  your Team (your Apple ID). Repeat for the
+                  <strong>SwiftSieveDNSProxy</strong> extension target so both use
+                  the same team and bundle ID prefix.
+                </p>
+              </div>
+            </div>
+            <div class="build-step">
+              <span class="build-step-num" aria-hidden="true">4</span>
+              <div>
+                <h3>Run on your device</h3>
+                <p>
+                  Connect your iPhone or iPad. In the Xcode toolbar, pick your
+                  device as the run destination (not a simulator). Press
+                  <strong>Run</strong> (or ⌘R). Xcode will build, install, and
+                  launch SwiftSieve. Then enable the DNS proxy in iOS:
+                  <strong>Settings → General → VPN &amp; Device Management → DNS</strong>,
+                  and select SwiftSieve DNS.
+                </p>
+              </div>
+            </div>
+          </div>
 
-          <h2>SwiftSieve isn't working... what do I do?</h2>
           <p>
-            First, check if SwiftSieve is enabled in iOS: 
-            Settings -> General -> VPN & Device Management -> DNS -> SwiftSieve 
-            which should show SwiftSieve DNS as "running".
-          </p>
-          <p>
-            If SwiftSieve is not enabled, or if the block log is empty, you may
-            need to reinstall the app. If you've already tried re-installing, please email
-            <a href="mailto:support@swiftsieve.com">support@swiftsieve.com</a>
-            and we will help you troubleshoot!
-          </p>
-
-          <h2>Which DNS provider does SwiftSieve use?</h2>
-          <p>
-            SwiftSieve forwards non-blocked DNS queries to Cloudflare
-            DNS-over-HTTPS at
-            <code>https://cloudflare-dns.com/dns-query</code>. Blocked domains
-            receive <code>NXDOMAIN</code>.
-          </p>
-          <p>
-            At this time, the app does not expose a setting to choose a different
-            upstream resolver.
-          </p>
-
-          <h2>Can I change the upstream DNS?</h2>
-          <p>
-            Not in this version. SwiftSieve is currently hard-wired to use
-            Cloudflare DoH as the only upstream. This keeps the configuration
-            surface small while the core DNS proxy behavior matures.
-          </p>
-
-          <h2>What does SwiftSieve log?</h2>
-          <p>
-            SwiftSieve maintains a local block log in its App Group. Each entry
-            includes:
-          </p>
-          <ul>
-            <li>The domain that was blocked.</li>
-            <li>A timestamp.</li>
-            <li>Which list (or custom rule) caused the block.</li>
-          </ul>
-          <p>
-            This log is stored locally and is used to show you what was blocked.
-            SwiftSieve does not upload this log to a SwiftSieve-owned analytics
-            backend.
-          </p>
-          <p>
-            For more detail on data handling, see the
-            <a href="./privacy.html">Privacy</a> page and the
+            For more detail, see the
             <a
-              href="https://github.com/shalloran/SwiftSieve2/blob/main/privacy.md"
+              href="https://github.com/shalloran/SwiftSieve2"
               target="_blank"
               rel="noreferrer"
-              >privacy.md</a
+              >SwiftSieve2 repo</a
             >
-            in the repo.
+            on GitHub. If something doesn’t build or run, open an issue or email
+            <a href="mailto:support@swiftsieve.com">support@swiftsieve.com</a>.
           </p>
-
-          <h2>Does SwiftSieve see my full browsing history?</h2>
-          <p>
-            SwiftSieve only sees DNS queries, not full HTTPS URLs. It also does
-            not attempt to intercept HTTPS or proxy application traffic. The block
-            log records only blocked domains and related metadata, not a complete
-            browsing history.
-          </p>
-
-          <h2>Do I need an Apple Developer account?</h2>
-          <p>
-            SwiftSieve is not on the App Store (Apple&rsquo;s DNS proxy APIs have
-            distribution limits). You build and install from source. To do that
-            you need an Apple Developer account so you can set up the app group
-            and DNS Proxy extension on your device. See
-            <a href="./building.html">Building</a> for a step-by-step Xcode guide.
-          </p>
-
-          <h2>How do I report a bug or suggest a feature?</h2>
-          <p>You can either:</p>
-          <ul>
-            <li>
-              Open an issue in the
-              <a
-                href="https://github.com/shalloran/SwiftSieve2"
-                target="_blank"
-                rel="noreferrer"
-                >SwiftSieve2 GitHub repo</a
-              >, or
-            </li>
-            <li>
-              Email:
-              <a href="mailto:support@swiftsieve.com">support@swiftsieve.com</a>
-            </li>
-          </ul>
         </article>
       </div>
     </main>
@@ -200,4 +164,3 @@
     </script>
   </body>
 </html>
-
